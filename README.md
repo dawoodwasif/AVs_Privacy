@@ -1,7 +1,7 @@
-# AVs_Privacy
+# Privacy Attacks and Defenses in Autonomous Vehicles under Federated Learning with Differential Privacy (AVs_Privacy)
 
 ## Overview
-AVs_Privacy is a repository dedicated to implementing and evaluating attack models such as membership inference attacks and data reconstruction attacks. The project enables systematic comparison of privacy and performance trade-offs between centralized models and federated learning models, with and without differential privacy mechanisms. This approach helps demonstrate the effectiveness of differential privacy in mitigating privacy attacks in federated learning settings.
+AVs_Privacy is a repository dedicated to implementing and evaluating attack models such as membership inference attacks and data reconstruction attacks. The project enables systematic comparison of privacy and performance trade-offs between centralized detection model and federated learning models, with and without differential privacy mechanisms. This approach helps demonstrate the effectiveness of differential privacy in mitigating privacy attacks in federated learning settings.
 
 ## Contents
 - **baseline/**: Contains baseline models for privacy analysis.
