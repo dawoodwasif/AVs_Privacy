@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# PyTorch
+*.pt
+*.pth
+model_weights*/
+runs*/
+wandb*/
+
+# TensorFlow
+*.pb
+*.ckpt
+events.out.tfevents.*
+
+
+

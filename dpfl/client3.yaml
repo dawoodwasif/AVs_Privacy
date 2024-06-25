@@ -1,0 +1,6 @@
+train : /home/Federated_Learning/Custom_YOLO_KITTI/images/trainC
+val : /home/Federated_Learning/Custom_YOLO_KITTI/images/validation
+test: /home/Federated_Learning/Custom_YOLO_KITTI/images/test
+
+names: ["Car", "Pedestrian", "Van", "Cyclist", "Truck", "Misc", "Tram", "Person_sitting"]
+nc: 8
