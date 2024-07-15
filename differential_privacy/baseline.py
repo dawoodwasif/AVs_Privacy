@@ -14,7 +14,9 @@ from ultralytics.nn.tasks import ClassificationModel, DetectionModel, OBBModel, 
 
 
 
-dp_method = "input"
+dp_method = "output"
+
+output_dp = 'False'
 
 if dp_method == "gradient":
     from gradient_dp_custom_trainer import CustomDetectionTrainer
@@ -23,7 +25,8 @@ elif dp_method == "objective":
 elif dp_method == "input":
     from input_dp_custom_trainer import CustomDetectionTrainer
 elif dp_method == "output":
-    from objective_dp_custom_trainer import CustomDetectionTrainer
+    from output_dp_custom_trainer import CustomDetectionModel
+    output_dp = 'True'
 
 
 class CustomYOLO(YOLO):
@@ -39,8 +42,8 @@ class CustomYOLO(YOLO):
                 "predictor": yolo.classify.ClassificationPredictor,
             },
             "detect": {
-                "model": DetectionModel,
-                "trainer": CustomDetectionTrainer, # yolo.detect.DetectionTrainer,  # Use the custom trainer
+                "model": CustomDetectionModel if output_dp else DetectionModel,
+                "trainer": yolo.detect.DetectionTrainer if output_dp else CustomDetectionTrainer, # yolo.detect.DetectionTrainer,  # Use the custom trainer
                 "validator": yolo.detect.DetectionValidator,
                 "predictor": yolo.detect.DetectionPredictor,
             },
