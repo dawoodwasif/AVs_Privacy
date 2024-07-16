@@ -1,4 +1,4 @@
-# AVs_Privacy
+# Privacy in AVs under Federated Learning with Differential Privacy (AVs_Privacy)
 
 ## Overview
 This project enables systematic comparison of privacy, fairness and performance trade-offs between centralized models and federated learning models, with and without differential privacy mechanisms. This approach helps demonstrate the effectiveness of differential privacy in mitigating privacy attacks and its effect on fairness in federated learning settings.
