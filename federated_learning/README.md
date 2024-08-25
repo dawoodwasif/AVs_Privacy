@@ -35,21 +35,24 @@ It's recommended to use a virtual environment to manage dependencies effectively
 ### Requirements
 
 
-`conda create -y --name dpfl python=3.10`
+`conda create -y --name privacy python=3.10`
 
-`conda activate dpfl`
+`conda activate privacy`
 
 `pip install -r requirements.txt`
 
 `apt-get install libglib2.0-0`
 
 
+In yolov8.yaml, in line 5 change the number of classes according to the dataset:
+
+`nc: 1  # number of classes 8 for KITTI and 1 for FACET`
 
 Run the Training Script
 
 Execute the training process by running:
 
-`python train.py`
+`python FedAvg_train.py`
 
 Configuration Files
 

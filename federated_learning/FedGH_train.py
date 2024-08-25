@@ -13,7 +13,10 @@ from ultralytics import YOLO
 
 import torch
 
-fed_name = "FedGH"
+dataset_name = "FACET"
+
+fed_name = f"FedGH_{dataset_name}"
+
 
 # Create the directory if it doesn't exist
 model_dir = os.path.join('model_weights', fed_name)
@@ -74,20 +77,23 @@ num_local_step = 1
 num_comm = 100
 num_client = 4
 lr = 0.0000001
+
 curr_path=os.getcwd()
-config_path = os.path.join(curr_path, 'config.yaml')
+configuration_path = os.path.join(curr_path, 'configurations')
+
+curr_config_path = os.path.join(configuration_path, dataset_name.lower())
 
 config_paths = []
-config_path1 = os.path.join(curr_path, 'client1.yaml')
+config_path1 = os.path.join(curr_config_path, 'client1.yaml')
 config_paths.append(config_path1)
 
-config_path2 = os.path.join(curr_path, 'client2.yaml')
+config_path2 = os.path.join(curr_config_path, 'client2.yaml')
 config_paths.append(config_path2)
 
-config_path3 = os.path.join(curr_path, 'client3.yaml')
+config_path3 = os.path.join(curr_config_path, 'client3.yaml')
 config_paths.append(config_path3)
 
-config_path4 = os.path.join(curr_path, 'client4.yaml')
+config_path4 = os.path.join(curr_config_path, 'client4.yaml')
 config_paths.append(config_path4)
 
 import os
