@@ -69,7 +69,7 @@ This project implements and evaluates several federated learning algorithms focu
   - Fairness evaluation tools (`fairness_evaluate.py`)
 
 - **dataset/**
-  - CARLA synthetic data generator (`generate_carla/`)
+  - FACET realistic and CARLA synthetic data generator (`generate_carla/`)
 
 - **differential_privacy/**
   - DP-SGD implementations with adaptive noise calibration
