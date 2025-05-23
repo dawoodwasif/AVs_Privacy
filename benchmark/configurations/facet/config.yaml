@@ -1,0 +1,6 @@
+train : /home/Virginia_Research/FACET/images/train
+val : /home/Virginia_Research/FACET/images/validation
+test: /home/Virginia_Research/FACET/images/test
+
+names: ["Pedestrian"]
+nc: 1

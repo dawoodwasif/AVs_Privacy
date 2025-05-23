@@ -1,68 +1,150 @@
 # Privacy in AVs under Federated Learning with Differential Privacy (AVs_Privacy)
 
-## Overview
-This project enables systematic comparison of privacy, fairness and performance trade-offs between centralized models and federated learning models, with and without differential privacy mechanisms. This approach helps demonstrate the effectiveness of differential privacy in mitigating privacy attacks and its effect on fairness in federated learning settings.
+## Technical Approach
 
-## Contents
-- **baseline/**: Contains baseline models for privacy analysis.
-- **dataset/**: Includes datasets used for training and evaluation.
-- **differential_privacy/**: Implements differential privacy in federated learning.
-- **federated_learning/**: Contains code for federated learning models.
+Our work explores the trade-off between privacy and fairness in federated learning-based object detection systems. We introduce RESFL (Robust and Equitable Sensitive Federated Learning), which combines adversarial privacy disentanglement with uncertainty-guided fairness-aware aggregation to optimize both privacy protections and fairness guarantees.
+
+### Key Technical Components
+
+1. **Adversarial Privacy Disentanglement**:
+   - Gradient reversal layer to remove sensitive attributes while preserving utility
+   - Feature extraction optimization that minimizes privacy leakage
+
+2. **Uncertainty-Guided Fairness-Aware Aggregation**:
+   - Evidential neural networks for uncertainty quantification
+   - Adaptive client contribution weighting based on fairness metrics
+   - Constrained optimization balancing performance and fairness objectives
+
+## Benchmark Methods
+
+This project implements and evaluates several federated learning algorithms focused on privacy-fairness trade-offs:
+
+1. **FedAvg**: Standard federated averaging baseline
+   ```bash
+   python federated_learning/FedAvg_train.py
+   ```
+
+2. **FedAvg-DP (Objective)**: Differential privacy with noise injection
+   ```bash
+   # For epsilon = 0.1
+   python differential_privacy/baseline.py --dp_method objective --epsilon 0.1
+   
+   # For epsilon = 0.5
+   python differential_privacy/baseline.py --dp_method objective --epsilon 0.5
+   ```
+
+3. **FairFed**: Fairness-aware aggregation
+   ```bash
+   python federated_learning/FairFed_train.py
+   ```
+
+4. **PrivFairFL**: Privacy-fairness trade-off methods
+   ```bash
+   # Pre-aggregation variant
+   python benchmark/PrivFairFL_Pre_train.py
+   
+   # Post-local update variant
+   python benchmark/PrivFairFL_Post_train.py
+   ```
+
+5. **PUFFLE**: Unified privacy-fairness approach
+   ```bash
+   python benchmark/PUFFLE_train.py
+   ```
+
+6. **PFU-FL**: Privacy-fairness-utility balancing
+   ```bash
+   python benchmark/FL_PFU_train.py
+   ```
+
+7. **RESFL**: Our proposed approach
+   ```bash
+   python resfl/RESFL.py --clients 10 --rounds 100 --adv_lambda 0.1 --uncertainty_threshold 0.75
+   ```
+
+## Project Structure
+
+- **baseline/**
+  - YOLOv8 baseline implementations
+  - Fairness evaluation tools (`fairness_evaluate.py`)
+
+- **dataset/**
+  - CARLA synthetic data generator (`generate_carla/`)
+
+- **differential_privacy/**
+  - DP-SGD implementations with adaptive noise calibration
+  - Objective, input, and output perturbation methods
+
+- **federated_learning/**
+  - Standard FL implementations (FedAvg, FedProx, etc.)
+  - Evaluation scripts for performance metrics
+
+- **resfl/**
+  - Our proposed approach implementation
+  - Fairness evaluation tools
+
+- **benchmark/**
+  - Privacy-fairness trade-off implementations (PrivFairFL, PUFFLE, PFU-FL)
 
 ## Installation
-To set up the project locally, follow these steps:
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/dawoodwasif/AVs_Privacy.git
-    cd AVs_Privacy
-    ```
+```bash
+# Clone or download the repository
+cd AVs_Privacy
 
-2. Create and activate a virtual environment:
-    ```bash
-    conda create --name privacy python=3.10
-    conda activate privacy
-    ```
+# Create and activate conda environment
+conda create --name privacy python=3.10
+conda activate privacy
 
-3. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+# Install dependencies
+pip install -r requirements.txt
+```
 
-## Usage
-To run the models and experiments, use the following commands:
+## Dataset Generation
 
-1. Navigate to the desired module (e.g., `baseline`, `differential_privacy`, or `federated_learning`):
-    ```bash
-    cd baseline
-    ```
+### CARLA Synthetic Dataset
 
-2. Execute the main script:
-    ```bash
-    python main.py
-    ```
+Generate a synthetic dataset with diverse pedestrian demographics and environmental conditions:
 
-## Contributing
-Contributions are welcome! Please follow these steps to contribute:
+```bash
+cd dataset/generate_carla
+./main_dataset.sh
+```
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
+This script generates data across:
+- 3 different towns (Town01, Town03, Town05)
+- 10 pedestrian skin tone groups
+- 13 weather conditions (variations of cloud, rain, fog)
+
+## Running Federated Learning Models
+
+### Training Models
+
+```bash
+# Navigate to the federated learning directory
+cd federated_learning
+
+# Run standard FedAvg baseline
+python FedAvg_train.py
+
+# Run our proposed RESFL approach
+cd ../resfl
+python RESFL.py --clients 4 --rounds 100 --adv_lambda 0.1
+```
+
+### Evaluating Models
+
+```bash
+# Evaluate model performance at specific rounds
+python eval_round_map.py
+
+# Generate performance plots
+python eval_plot.py
+
+# Assess fairness across demographic groups
+python eval_fairness.py --model path/to/model.pt --test_path path/to/test/images --metadata path/to/metadata.json
+```
 
 ## License
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-### Updates
-
-- **15.05.2024 YOLOv8 Baseline Scripts Added** : [Details]
-- **01.06.2024 Federated Learning Scripts Added** : [Details]
-- **15.06.2024 Differential Privacy Scripts Added** : [Details]
-- **Attack Model Scripts Upcoming** : [Details]
-
-### References
-
-[1]: [Glancy, Dorothy J. "Privacy in autonomous vehicles." Santa Clara L. Rev. 52 (2012): 1171.](https://digitalcommons.law.scu.edu/cgi/viewcontent.cgi?article=2728&context=lawreview) 
-
-[2]: [Jallepalli, Deepthi, et al. "Federated learning for object detection in autonomous vehicles." 2021 IEEE Seventh International Conference on Big Data Computing Service and Applications (BigDataService). IEEE, 2021.](https://ieeexplore.ieee.org/abstract/document/9564384/) 
