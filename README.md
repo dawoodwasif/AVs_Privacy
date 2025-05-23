@@ -1,8 +1,8 @@
-# Privacy in AVs under Federated Learning with Differential Privacy (AVs_Privacy)
+# RESFL: An Uncertainty-Aware Framework for Responsible Federated Learning by Balancing Privacy, Fairness and Utility
 
 ## Technical Approach
 
-Our work explores the trade-off between privacy and fairness in federated learning-based object detection systems. We introduce RESFL (Robust and Equitable Sensitive Federated Learning), which combines adversarial privacy disentanglement with uncertainty-guided fairness-aware aggregation to optimize both privacy protections and fairness guarantees.
+Our work explores the trade-off between privacy, fairness, and utility in federated learning-based object detection systems. We introduce RESFL, which combines adversarial privacy disentanglement with uncertainty-guided fairness-aware aggregation to optimize both privacy protections and fairness guarantees.
 
 ### Key Technical Components
 
