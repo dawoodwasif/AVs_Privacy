@@ -54,7 +54,7 @@ This project implements and evaluates several federated learning algorithms focu
 
 6. **PFU-FL**: Privacy-fairness-utility balancing
    ```bash
-   python benchmark/FL_PFU_train.py
+   python benchmark/PFU-FL_train.py
    ```
 
 7. **RESFL**: Our proposed approach
@@ -73,11 +73,11 @@ This project implements and evaluates several federated learning algorithms focu
 
 - **differential_privacy/**
   - DP-SGD implementations with adaptive noise calibration
-  - Objective, input, and output perturbation methods
+  - Gradient, objective, input, and output perturbation methods (we use gradient noise variant in paper)
 
 - **federated_learning/**
-  - Standard FL implementations (FedAvg, FedProx, etc.)
-  - Evaluation scripts for performance metrics
+  - Standard FL implementations (FedAvg, FedProx, FedNova, etc.)
+  - Evaluation scripts for performance metrics (we use FedAvg in paper)
 
 - **resfl/**
   - Our proposed approach implementation
@@ -118,6 +118,19 @@ This script generates data across:
 
 ## Running Federated Learning Models
 
+
+### Federated learning variants (federated_learning/)
+The folder includes runnable baselines that share the same dataset configs under `federated_learning/configurations/`. Only **FedAvg** is reported in the paper; the rest are provided for completeness to support extension and replication.
+
+- `FedAvg_train.py`  standard averaging baseline  
+- `FedProx_train.py`  proximal regularization for client drift  
+- `FedNova_train.py`  normalized averaging to fix objective inconsistency  
+- `FedAdam_train.py`  server Adam for faster convergence  
+- `FedMA_train.py`  matched averaging for heterogeneous models  
+- `FedGH_train.py`  generalized global header for heterogeneity  
+- `CHFL_train.py`  continual horizontal FL
+
+
 ### Training Models
 
 ```bash
@@ -144,6 +157,14 @@ python eval_plot.py
 # Assess fairness across demographic groups
 python eval_fairness.py --model path/to/model.pt --test_path path/to/test/images --metadata path/to/metadata.json
 ```
+
+### Attacks (quick use)
+
+- Privacy: ```privacy_attacks/mia.py``` (MIA) and ```privacy_attacks/pia.py``` (AIA).
+- Robustness: ```robustness_attacks/byzantine.py``` and ```robustness_attacks/poison.py```.
+
+Scripts output Success Rate, TPR@FPR, AIA accuracy, BA AD, and DPA EODD.
+Follow the README in each folder to reproduce attack results.
 
 ## License
 
