@@ -65,7 +65,7 @@ This project implements and evaluates several federated learning algorithms focu
 ## Project Structure
 
 - **baseline/**
-  - YOLOv8 baseline implementations
+  - YOLOv8 centralized model baseline implementations (no FL)
   - Fairness evaluation tools (`fairness_evaluate.py`)
 
 - **dataset/**
