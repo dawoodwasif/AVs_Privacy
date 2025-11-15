@@ -52,8 +52,8 @@ from ultralytics.engine.trainer import BaseTrainer
 import random
 
 # Global parameters for differential privacy
-epsilon = 500.0  # Privacy budget
-delta = 1e-5  # Probability of privacy guarantee not holding
+epsilon = 0.5  # Privacy budget
+delta = 1e-6  # Probability of privacy guarantee not holding
 sensitivity = 1.0  # Sensitivity of the gradient
 
 class CustomDetectionTrainer(DetectionTrainer):
@@ -62,7 +62,7 @@ class CustomDetectionTrainer(DetectionTrainer):
         self.scaler.unscale_(self.optimizer)  # Unscale gradients
         
         # Clip gradients to the sensitivity threshold
-        #torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=sensitivity)
+        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=sensitivity)
         
         # Add noise to gradients for differential privacy
         sigma = sensitivity * np.sqrt(2 * np.log(1.25 / delta)) / epsilon
