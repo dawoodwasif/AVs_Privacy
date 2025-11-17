@@ -84,7 +84,7 @@ This project implements and evaluates several federated learning algorithms focu
   - Fairness evaluation tools
 
 - **benchmark/**
-  - Privacy-fairness trade-off implementations (PrivFairFL, PUFFLE, PFU-FL)
+  - Privacy-fairness trade-off implementations (PrivFairFL, PUFFLE, PFU-FL, FairFed)
 
 ## Installation
 
