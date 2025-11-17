@@ -52,10 +52,6 @@ They are **not part of the evaluated baselines or tables** and were **not tuned*
 - `FedGH_train.py` — gradient homogenization  
 - `CHFL_train.py` — compressed/heuristic FL variant
 
-**Scope**
-- Purpose: sanity checks and reference implementations.
-- Evaluation: excluded from paper results; no hyperparameter sweep; no fairness/privacy reporting.
-
 **Quick run (example)**
 ```bash
 # Example extra baselines (not used in the paper’s tables)
